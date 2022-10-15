@@ -1,8 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:provider/provider.dart';
 import 'package:walking_tales/app_routes.dart';
+import 'package:walking_tales/cubits/auth/cubit.dart';
 import 'package:walking_tales/firebase_options.dart';
+import 'package:walking_tales/providers/app_provider.dart';
+import 'package:walking_tales/screens/login/login.dart';
 import 'package:walking_tales/screens/splash/splash.dart';
 
 import 'configs/core_theme.dart' as theme;
@@ -22,17 +27,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Walking Tales',
-      theme: theme.themeLight,
-      initialRoute: AppRoutes.splash,
-      localizationsDelegates: const [
-        FormBuilderLocalizations.delegate,
+    return MultiProvider(
+      providers: [
+        BlocProvider(create: (_) => AuthCubit()),
+        ChangeNotifierProvider(create: (_) => AppProvider()),
       ],
-      routes: {
-        AppRoutes.splash: (context) => const SplashScreen(),
-      },
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Walking Tales',
+        theme: theme.themeLight,
+        initialRoute: AppRoutes.login,
+        localizationsDelegates: const [
+          FormBuilderLocalizations.delegate,
+        ],
+        routes: {
+          AppRoutes.splash: (context) => const SplashScreen(),
+          AppRoutes.login: (context) => const LoginScreen(),
+        },
+      ),
     );
   }
 }

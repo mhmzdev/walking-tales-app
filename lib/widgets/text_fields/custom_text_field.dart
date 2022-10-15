@@ -24,8 +24,8 @@ class CustomTextField extends StatefulWidget {
   final TextCapitalization textCapitalization;
 
   final String? errorText;
-  final String? Function(String?)? validatorFtn;
-  final String? Function(String?)? onChangeFtn;
+  final String? Function(String?)? validators;
+  final String? Function(String?)? onChanged;
   final List<TextInputFormatter>? inputformatters;
 
   const CustomTextField({
@@ -36,9 +36,9 @@ class CustomTextField extends StatefulWidget {
     this.errorText,
     this.autoFocus,
     this.prefixIcon,
-    this.onChangeFtn,
+    this.onChanged,
     this.initialValue,
-    this.validatorFtn,
+    this.validators,
     required this.name,
     this.controller,
     required this.hint,
@@ -153,8 +153,8 @@ class CustomTextFieldState extends State<CustomTextField> {
               ),
             ),
           ),
-          validator: widget.validatorFtn,
-          onChanged: widget.onChangeFtn,
+          validator: widget.validators,
+          onChanged: widget.onChanged,
         ),
       ],
     );
