@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "751965537338",
+    "project_id": "walking-tales",
+    "storage_bucket": "walking-tales.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:751965537338:android:d4444b2d78dc29827c2103",
+        "android_client_info": {
+          "package_name": "com.fjwu.walking_tales"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "751965537338-pn9vmeo8f6a3dtjtmbqd767vmduvusdv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC382PvBgc3OOjHwdNy6vX956V2gx6wQJE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "751965537338-pn9vmeo8f6a3dtjtmbqd767vmduvusdv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
