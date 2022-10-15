@@ -11,10 +11,14 @@ class CustomDateTimeField extends StatelessWidget {
   final InputType? inputType;
   final Icon? icon;
   final DateFormat format;
+  final DateTime firstDate;
+  final DateTime lastDate;
 
   const CustomDateTimeField({
     Key? key,
     required this.hint,
+    required this.firstDate,
+    required this.lastDate,
     required this.name,
     this.validatorFtn,
     this.inputType,
@@ -33,10 +37,10 @@ class CustomDateTimeField extends StatelessWidget {
         style: AppText.b1,
         format: format,
         name: name,
-        firstDate: DateTime.now(),
-        lastDate: DateTime.now().add(const Duration(days: 10)),
+        firstDate: firstDate,
+        lastDate: lastDate,
         inputType: inputType ?? InputType.date,
-        initialDate: DateTime.now(),
+        initialDate: DateTime(1999),
         initialTime: TimeOfDay.now(),
         decoration: InputDecoration(
           filled: true,

@@ -33,7 +33,7 @@ class AppButton extends StatelessWidget {
           borderRadius: UIProps.radiusM,
           color: color ?? AppTheme.c.primary,
         ),
-        child: child,
+        child: Center(child: child),
       ),
     );
   }

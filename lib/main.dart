@@ -8,6 +8,7 @@ import 'package:walking_tales/cubits/auth/cubit.dart';
 import 'package:walking_tales/firebase_options.dart';
 import 'package:walking_tales/providers/app_provider.dart';
 import 'package:walking_tales/screens/login/login.dart';
+import 'package:walking_tales/screens/register/register.dart';
 import 'package:walking_tales/screens/splash/splash.dart';
 
 import 'configs/core_theme.dart' as theme;
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         routes: {
           AppRoutes.splash: (context) => const SplashScreen(),
           AppRoutes.login: (context) => const LoginScreen(),
+          AppRoutes.register: (context) => const RegisterScreen(),
         },
       ),
     );

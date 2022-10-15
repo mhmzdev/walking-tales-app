@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:walking_tales/app_routes.dart';
 import 'package:walking_tales/configs/app.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:walking_tales/configs/configs.dart';
@@ -87,11 +88,9 @@ class LoginScreen extends StatelessWidget {
                   ),
                   Space.y,
                   AppButton(
-                    child: Center(
-                      child: Text(
-                        'Login',
-                        style: AppText.b1b.cl(Colors.white),
-                      ),
+                    child: Text(
+                      'Login',
+                      style: AppText.b1b.cl(Colors.white),
                     ),
                     onPressed: () {
                       if (state.loginFormState.currentState!
@@ -105,7 +104,8 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       const Text('New Here?'),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () =>
+                            Navigator.pushNamed(context, AppRoutes.register),
                         child: const Text('Create Account'),
                       ),
                     ],

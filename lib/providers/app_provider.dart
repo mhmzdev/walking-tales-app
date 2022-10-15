@@ -8,6 +8,7 @@ class AppProvider extends ChangeNotifier {
 
   // keys
   final loginFormState = GlobalKey<FormBuilderState>();
+  final registerFormState = GlobalKey<FormBuilderState>();
 
   // bottom bar
   int bottomIndex = 0;
