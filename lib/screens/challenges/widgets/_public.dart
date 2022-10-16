@@ -14,7 +14,7 @@ class _Public extends StatelessWidget {
           children: [
             Text(
               'Public challenges',
-              style: AppText.h1b,
+              style: AppText.h2b,
             ),
             Text(
               'Participate in challenges happening aroung you!',

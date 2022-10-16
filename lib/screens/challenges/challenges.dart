@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:walking_tales/animations/bottom_animation.dart';
 import 'package:walking_tales/configs/app.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:walking_tales/configs/configs.dart';
+import 'package:walking_tales/utils/static_utils.dart';
+import 'package:walking_tales/widgets/buttons/app_button.dart';
 import 'package:walking_tales/widgets/cards/challenge_card.dart';
+import 'package:walking_tales/widgets/dividers/app_dividers.dart';
 
 part 'widgets/_public.dart';
 part 'widgets/_friends.dart';
 
-class ChallengesScreen extends StatelessWidget {
+class ChallengesScreen extends StatefulWidget {
   const ChallengesScreen({Key? key}) : super(key: key);
 
+  @override
+  State<ChallengesScreen> createState() => _ChallengesScreenState();
+}
+
+class _ChallengesScreenState extends State<ChallengesScreen> {
   @override
   Widget build(BuildContext context) {
     App.init(context);
@@ -18,41 +27,51 @@ class ChallengesScreen extends StatelessWidget {
 
     return DefaultTabController(
       length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          bottom: TabBar(
-            indicatorColor: Colors.white,
-            indicatorWeight: 4,
-            tabs: [
-              Padding(
-                padding: Space.v,
-                child: Text(
-                  'Public',
-                  style: AppText.b1b,
+      child: Builder(builder: (context) {
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: DefaultTabController.of(context)?.index == 0
+                ? AppTheme.c.primary
+                : Colors.green,
+            bottom: TabBar(
+              indicatorColor: Colors.white,
+              indicatorWeight: 4,
+              onTap: (value) {
+                setState(() {
+                  DefaultTabController.of(context)?.index = value;
+                });
+              },
+              tabs: [
+                Padding(
+                  padding: Space.v,
+                  child: Text(
+                    'Public',
+                    style: AppText.b1b,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: Space.v,
-                child: Text(
-                  'Friends',
-                  style: AppText.b1b,
+                Padding(
+                  padding: Space.v,
+                  child: Text(
+                    'Friends',
+                    style: AppText.b1b,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        body: const SafeArea(
-          top: false,
-          bottom: true,
-          child: TabBarView(
-            physics: NeverScrollableScrollPhysics(),
-            children: [
-              _Public(),
-              _Friends(),
-            ],
+          body: const SafeArea(
+            top: false,
+            bottom: true,
+            child: TabBarView(
+              physics: NeverScrollableScrollPhysics(),
+              children: [
+                _Public(),
+                _Friends(),
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

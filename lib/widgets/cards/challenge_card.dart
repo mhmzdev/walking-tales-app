@@ -2,19 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:walking_tales/configs/configs.dart';
 
 class ChallengeCard extends StatelessWidget {
-  const ChallengeCard({Key? key}) : super(key: key);
+  final Color? shadowColor;
+
+  const ChallengeCard({
+    Key? key,
+    this.shadowColor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      decoration: UIProps.boxCard,
+      decoration: UIProps.boxCard!,
       padding: Space.all(),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CircleAvatar(
-            backgroundColor: AppTheme.c.primary,
+            backgroundColor: shadowColor ?? AppTheme.c.primary,
             child: Text(
               'ISB',
               style: AppText.b1b.cl(
