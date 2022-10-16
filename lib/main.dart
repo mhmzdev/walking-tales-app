@@ -8,6 +8,7 @@ import 'package:walking_tales/cubits/auth/cubit.dart';
 import 'package:walking_tales/cubits/domain/cubit.dart';
 import 'package:walking_tales/firebase_options.dart';
 import 'package:walking_tales/providers/app_provider.dart';
+import 'package:walking_tales/screens/challenges/challenges.dart';
 import 'package:walking_tales/screens/home/home.dart';
 import 'package:walking_tales/screens/login/login.dart';
 import 'package:walking_tales/screens/register/register.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Walking Tales',
         theme: theme.themeLight,
-        initialRoute: AppRoutes.splash,
+        initialRoute: AppRoutes.challenges,
         localizationsDelegates: const [
           FormBuilderLocalizations.delegate,
         ],
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
           AppRoutes.login: (context) => const LoginScreen(),
           AppRoutes.splash: (context) => const SplashScreen(),
           AppRoutes.register: (context) => const RegisterScreen(),
+          AppRoutes.challenges: (context) => const ChallengesScreen(),
         },
       ),
     );

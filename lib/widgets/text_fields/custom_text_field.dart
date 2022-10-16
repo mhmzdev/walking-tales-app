@@ -113,6 +113,7 @@ class CustomTextFieldState extends State<CustomTextField> {
                   )
                 : null,
             filled: true,
+            fillColor: Colors.white,
             contentPadding:
                 EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
             hintText: widget.hint,
