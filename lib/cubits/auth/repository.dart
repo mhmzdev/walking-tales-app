@@ -23,7 +23,7 @@ class AuthRepository {
     double weight,
     double height,
   ) {
-    final age = dob.difference(DateTime.now()).inDays;
+    final age = DateTime.now().year - dob.year;
 
     Map<String, dynamic> map = {
       'fullName': fullName,

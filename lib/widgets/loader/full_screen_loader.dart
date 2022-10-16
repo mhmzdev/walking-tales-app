@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:walking_tales/configs/app_theme.dart';
 
 class FullScreenLoader extends StatelessWidget {
   final bool loading;
@@ -17,11 +18,15 @@ class FullScreenLoader extends StatelessWidget {
       absorbing: loading,
       child: BackdropFilter(
         filter: ui.ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
-        child: const SizedBox(
+        child: SizedBox(
           width: double.infinity,
           height: double.infinity,
           child: Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                AppTheme.c.primary,
+              ),
+            ),
           ),
         ),
       ),

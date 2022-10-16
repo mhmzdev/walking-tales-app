@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
 import 'package:walking_tales/configs/app.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:walking_tales/configs/configs.dart';
+import 'package:walking_tales/cubits/auth/cubit.dart';
 import 'package:walking_tales/providers/app_provider.dart';
-import 'package:walking_tales/utils/uni_domains.dart';
+import 'package:walking_tales/utils/custom_snackbar.dart';
+import 'package:walking_tales/utils/domains.dart';
 import 'package:walking_tales/widgets/buttons/app_button.dart';
+import 'package:walking_tales/widgets/loader/full_screen_loader.dart';
 import 'package:walking_tales/widgets/screen/screen.dart';
 import 'package:walking_tales/widgets/text_fields/custom_text_field.dart';
 import 'package:walking_tales/widgets/text_fields/date_time_text_field.dart';
@@ -21,8 +26,32 @@ class RegisterScreen extends StatelessWidget {
     ScreenUtil.init(context, designSize: const Size(428, 926));
 
     final state = AppProvider.state(context);
+    final authCubit = AuthCubit.cubit(context);
 
     return Screen(
+      overlayWidgets: [
+        BlocConsumer<AuthCubit, AuthState>(
+          listener: (context, state) {
+            if (state is AuthRegisterFailed) {
+              CustomSnackBars.failure(context, state.message!);
+            } else if (state is AuthRegisterSuccess) {
+              CustomSnackBars.success(
+                context,
+                'Account has been created successfully. Please check your email for verification.',
+              );
+              Navigator.pop(context);
+            }
+          },
+          builder: (context, state) {
+            if (state is AuthRegisterLoading) {
+              return const FullScreenLoader(
+                loading: true,
+              );
+            }
+            return const SizedBox();
+          },
+        ),
+      ],
       child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
@@ -99,6 +128,29 @@ class RegisterScreen extends StatelessWidget {
                     },
                   ),
                   Space.y1,
+                  CustomTextField(
+                    name: 'height',
+                    hint: 'Height (ft)',
+                    prefixIcon: const Icon(Icons.height_rounded),
+                    textInputType: TextInputType.number,
+                    validators: FormBuilderValidators.required(),
+                  ),
+                  Space.y1,
+                  CustomTextField(
+                    name: 'weight',
+                    hint: 'Weight (kg)',
+                    prefixIcon: const Icon(Icons.monitor_weight_outlined),
+                    textInputType: TextInputType.number,
+                    validators: FormBuilderValidators.compose([
+                      FormBuilderValidators.min(10,
+                          errorText: 'Weight cannot be less than 10 KG'),
+                      FormBuilderValidators.required(),
+                    ]),
+                    inputformatters: [
+                      LengthLimitingTextInputFormatter(3),
+                    ],
+                  ),
+                  Space.y1,
                   Text(
                     'Gender',
                     style: AppText.b1b.cl(
@@ -155,6 +207,16 @@ class RegisterScreen extends StatelessWidget {
                               context,
                               values['email']!,
                             ),
+                          );
+                        } else {
+                          authCubit.register(
+                            values['name']!,
+                            values['email']!,
+                            values['password']!,
+                            values['gender']!,
+                            DateTime.parse(values['dob']!),
+                            double.parse(values['weight']!),
+                            double.parse(values['height']!),
                           );
                         }
                       }
