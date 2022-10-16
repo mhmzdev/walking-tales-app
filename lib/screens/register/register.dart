@@ -222,7 +222,6 @@ class RegisterScreen extends StatelessWidget {
                       }
                     },
                   ),
-                  Space.yf(80),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
