@@ -1,9 +1,15 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:walking_tales/app_routes.dart';
 import 'package:walking_tales/configs/app.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:walking_tales/cubits/user_stats/cubit.dart';
+
+import '../../providers/user_location.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:lottie/lottie.dart';
 import 'package:walking_tales/configs/configs.dart';
 import 'package:walking_tales/cubits/auth/cubit.dart';
 import 'package:walking_tales/cubits/domain/cubit.dart';
@@ -17,8 +23,13 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  void next() async {
-    Future.delayed(const Duration(seconds: 3), () async {
+  void getUserLocation() async {
+    final userStatsCubit = UserStatsCubit.cubit(context);
+
+    userStatsCubit.fetch();
+    final userLocationProvider = UserLocationProvider.state(context);
+    await userLocationProvider.getUserLocation();
+    Timer(const Duration(seconds: 2), () async {
       final user = FirebaseAuth.instance.currentUser;
 
       DomainCubit.cubit(context).fetch();
@@ -39,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    next();
+    getUserLocation();
   }
 
   @override
