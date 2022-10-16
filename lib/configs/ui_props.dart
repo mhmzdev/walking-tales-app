@@ -84,10 +84,10 @@ abstract class UIProps {
   static initShadows() {
     cardShadow = [
       BoxShadow(
-        color: AppTheme.c.shadowSub!,
-        blurRadius: 4,
+        color: AppTheme.c.primary.withAlpha(80),
+        blurRadius: 18,
         spreadRadius: 0,
-        offset: const Offset(0, 4),
+        offset: const Offset(0, 2),
       ),
     ];
     bottomNavigationShadow = [
@@ -103,7 +103,7 @@ abstract class UIProps {
     boxCard = BoxDecoration(
       borderRadius: radiusM,
       boxShadow: cardShadow,
-      color: AppTheme.c.background,
+      color: AppTheme.c.backgroundSub,
     );
   }
 }

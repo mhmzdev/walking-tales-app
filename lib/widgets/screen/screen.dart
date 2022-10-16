@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:walking_tales/configs/app_theme.dart';
 
 class Screen extends StatelessWidget {
   final Widget child;
@@ -13,12 +15,17 @@ class Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          child,
-          ...overlayWidgets ?? [],
-        ],
+      child: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle(
+          statusBarColor: AppTheme.c.primary,
+        ),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            child,
+            ...overlayWidgets ?? [],
+          ],
+        ),
       ),
     );
   }

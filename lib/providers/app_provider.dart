@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 import 'package:walking_tales/cubits/user_stats/cubit.dart';
 import 'package:walking_tales/models/stats.dart';
@@ -8,6 +9,11 @@ import 'package:walking_tales/models/stats.dart';
 class AppProvider extends ChangeNotifier {
   static AppProvider state(BuildContext context) =>
       Provider.of<AppProvider>(context, listen: false);
+
+  // keys
+  final loginFormState = GlobalKey<FormBuilderState>();
+  final registerFormState = GlobalKey<FormBuilderState>();
+  final challengeFormState = GlobalKey<FormBuilderState>();
 
   // bottom bar
   int bottomIndex = 0;

@@ -11,9 +11,21 @@ import 'package:walking_tales/providers/user_location.dart';
 import 'package:walking_tales/screens/dashboard/dashboard.dart';
 import 'package:walking_tales/screens/home/home.dart';
 import 'package:walking_tales/screens/leader_board/leader_board.dart';
+import 'package:walking_tales/cubits/auth/cubit.dart';
+import 'package:walking_tales/cubits/challenge/cubit.dart';
+import 'package:walking_tales/cubits/domain/cubit.dart';
+import 'package:walking_tales/firebase_options.dart';
+import 'package:walking_tales/providers/app_provider.dart';
+import 'package:walking_tales/screens/challenge_detail/challenge_detail.dart';
+import 'package:walking_tales/screens/challenges/challenges.dart';
+import 'package:walking_tales/screens/create_challenge/create_challenge.dart';
+import 'package:walking_tales/screens/home/home.dart';
+import 'package:walking_tales/screens/login/login.dart';
+import 'package:walking_tales/screens/register/register.dart';
 import 'package:walking_tales/screens/splash/splash.dart';
 import 'package:walking_tales/screens/track_completed/track_completed.dart';
 import 'package:walking_tales/screens/tracking/tracking.dart';
+import 'package:walking_tales/screens/create_challenge/create_challenge.dart';
 
 import 'configs/core_theme.dart' as theme;
 
@@ -37,6 +49,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => UserStatsCubit()),
         ChangeNotifierProvider(create: (context) => AppProvider()),
         ChangeNotifierProvider(create: (context) => UserLocationProvider()),
+        BlocProvider(create: (_) => AuthCubit()),
+        BlocProvider(create: (_) => DomainCubit()),
+        BlocProvider(create: (_) => ChallengeCubit()),
+        ChangeNotifierProvider(create: (_) => AppProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -52,7 +68,14 @@ class MyApp extends StatelessWidget {
           AppRoutes.dashboard: (context) => const DashboardScreen(),
           AppRoutes.trackCompleted: (context) => const TrackCompletedScreen(),
           AppRoutes.home: (context) => const HomeScreen(),
-          AppRoutes.leaderBoard: (context) => const LeaderBoardScreen()
+          AppRoutes.leaderBoard: (context) => const LeaderBoardScreen(),
+          AppRoutes.home: (context) => const HomeScreen(),
+          AppRoutes.login: (context) => const LoginScreen(),
+          AppRoutes.splash: (context) => const SplashScreen(),
+          AppRoutes.register: (context) => const RegisterScreen(),
+          AppRoutes.challenges: (context) => const ChallengesScreen(),
+          AppRoutes.createChallenge: (context) => const CreateChallengeScreen(),
+          AppRoutes.challengeDetail: (context) => const ChallengeDetailScreen(),
         },
       ),
     );

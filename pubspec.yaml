@@ -69,6 +69,8 @@ dependencies:
   fl_chart: ^0.55.2
   sleek_circular_slider: ^2.0.1
   delayed_display: ^2.0.0
+  awesome_snackbar_content: ^0.0.8
+  syncfusion_flutter_charts: ^20.1.58+1
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +82,14 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.10.0
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/icon/app_icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -97,6 +107,7 @@ flutter:
     - assets/
     - assets/animations/
 
+    - assets/lottie/
     
 
   # An image asset can refer to one or more resolution-specific "variants", see
