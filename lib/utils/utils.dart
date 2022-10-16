@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:walking_tales/models/leaderboard_Item.dart';
+import 'package:walking_tales/models/leaderboard_item.dart';
 import 'package:walking_tales/models/nav_bar_item_model.dart';
 import 'package:walking_tales/painters/trophy.dart';
 import 'package:walking_tales/screens/home/home.dart';
