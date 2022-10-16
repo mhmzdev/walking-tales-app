@@ -44,14 +44,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        BlocProvider(create: (context) => UserStatsCubit()),
-        ChangeNotifierProvider(create: (context) => AppProvider()),
-        ChangeNotifierProvider(create: (context) => UserLocationProvider()),
         BlocProvider(create: (_) => AuthCubit()),
         BlocProvider(create: (_) => DietCubit()),
         BlocProvider(create: (_) => DomainCubit()),
         BlocProvider(create: (_) => ChallengeCubit()),
+        BlocProvider(create: (context) => UserStatsCubit()),
         ChangeNotifierProvider(create: (_) => AppProvider()),
+        ChangeNotifierProvider(create: (context) => AppProvider()),
+        ChangeNotifierProvider(create: (context) => UserLocationProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
