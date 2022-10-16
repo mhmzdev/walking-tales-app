@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Walking Tales',
         theme: theme.themeLight,
-        initialRoute: AppRoutes.challenges,
+        initialRoute: AppRoutes.splash,
         localizationsDelegates: const [
           FormBuilderLocalizations.delegate,
         ],
