@@ -134,6 +134,7 @@ class CreateChallengeScreen extends StatelessWidget {
                 ),
                 Space.y1,
                 AppButton(
+                  color: Colors.green,
                   child: Text(
                     'Submit',
                     style: AppText.b1b.cl(Colors.white),
