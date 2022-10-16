@@ -39,6 +39,7 @@ class RegisterScreen extends StatelessWidget {
               CustomSnackBars.success(
                 context,
                 'Account has been created successfully. Please check your email for verification.',
+                color: AppTheme.c.primary,
               );
               Navigator.pop(context);
             }
