@@ -1,11 +1,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fjwu.walking_tales">
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
    <application
         android:label="Walking Tales"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+         <meta-data 
+              android:name="com.google.android.geo.API_KEY"
+              android:value="AIzaSyC382PvBgc3OOjHwdNy6vX956V2gx6wQJE"
+              />
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -15,8 +23,7 @@
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize">
 
-        <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyC382PvBgc3OOjHwdNy6vX956V2gx6wQJE"/>
+           
 
             <!-- Specifies an Android theme to apply to this Activity as soon as
                  the Android process has started. This theme is visible to the user
