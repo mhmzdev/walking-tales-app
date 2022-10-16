@@ -8,10 +8,12 @@ class AppButton extends StatelessWidget {
   final Widget child;
   final VoidCallback onPressed;
   final Color? color;
+  final Color? borderColor;
   final double? height;
   final double? width;
   const AppButton({
     Key? key,
+    this.borderColor,
     required this.child,
     required this.onPressed,
     this.height,
@@ -32,6 +34,10 @@ class AppButton extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: UIProps.radiusM,
           color: color ?? AppTheme.c.primary,
+          border: Border.all(
+            width: 2,
+            color: borderColor ?? Colors.transparent,
+          ),
         ),
         child: Center(child: child),
       ),

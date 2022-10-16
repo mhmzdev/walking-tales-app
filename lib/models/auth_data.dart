@@ -63,8 +63,8 @@ class AuthData {
       imageUrl: map['imageUrl'] as String,
       gender: map['gender'] as String,
       age: map['age'] as int,
-      weight: double.parse(map['weight']),
-      height: double.parse(map['height']),
+      weight: double.parse(map['weight'].toString()),
+      height: double.parse(map['height'].toString()),
     );
   }
 

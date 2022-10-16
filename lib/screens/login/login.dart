@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:walking_tales/app_routes.dart';
@@ -8,9 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:walking_tales/configs/configs.dart';
 import 'package:walking_tales/cubits/auth/cubit.dart';
 import 'package:walking_tales/providers/app_provider.dart';
-import 'package:walking_tales/utils/custom_snackbar.dart';
+import 'package:walking_tales/utils/overlays.dart';
 import 'package:walking_tales/widgets/buttons/app_button.dart';
-import 'package:walking_tales/widgets/loader/full_screen_loader.dart';
 import 'package:walking_tales/widgets/screen/screen.dart';
 import 'package:walking_tales/widgets/text_fields/custom_text_field.dart';
 
@@ -26,25 +24,7 @@ class LoginScreen extends StatelessWidget {
     final authCubit = AuthCubit.cubit(context);
 
     return Screen(
-      overlayWidgets: [
-        BlocConsumer<AuthCubit, AuthState>(
-          listener: (context, state) {
-            if (state is AuthLoginFailed) {
-              CustomSnackBars.failure(context, state.message!);
-            } else if (state is AuthLoginSuccess) {
-              Navigator.pop(context);
-            }
-          },
-          builder: (context, state) {
-            if (state is AuthLoginLoading) {
-              return const FullScreenLoader(
-                loading: true,
-              );
-            }
-            return const SizedBox();
-          },
-        ),
-      ],
+      overlayWidgets: Overlays.authOverlay(),
       child: Scaffold(
         body: SafeArea(
           child: Padding(
@@ -86,6 +66,7 @@ class LoginScreen extends StatelessWidget {
                   CustomTextField(
                     name: 'email',
                     hint: 'Email address',
+                    textCapitalization: TextCapitalization.none,
                     prefixIcon: const Icon(Icons.email_outlined),
                     textInputType: TextInputType.emailAddress,
                     validators: FormBuilderValidators.compose([
@@ -119,6 +100,8 @@ class LoginScreen extends StatelessWidget {
                     onPressed: () {
                       if (state.loginFormState.currentState!
                           .saveAndValidate()) {
+                        FocusScope.of(context).unfocus();
+
                         final fields =
                             state.loginFormState.currentState!.fields;
 

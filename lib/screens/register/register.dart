@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
@@ -9,10 +8,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:walking_tales/configs/configs.dart';
 import 'package:walking_tales/cubits/auth/cubit.dart';
 import 'package:walking_tales/providers/app_provider.dart';
-import 'package:walking_tales/utils/custom_snackbar.dart';
 import 'package:walking_tales/utils/domains.dart';
+import 'package:walking_tales/utils/overlays.dart';
 import 'package:walking_tales/widgets/buttons/app_button.dart';
-import 'package:walking_tales/widgets/loader/full_screen_loader.dart';
 import 'package:walking_tales/widgets/screen/screen.dart';
 import 'package:walking_tales/widgets/text_fields/custom_text_field.dart';
 import 'package:walking_tales/widgets/text_fields/date_time_text_field.dart';
@@ -29,29 +27,7 @@ class RegisterScreen extends StatelessWidget {
     final authCubit = AuthCubit.cubit(context);
 
     return Screen(
-      overlayWidgets: [
-        BlocConsumer<AuthCubit, AuthState>(
-          listener: (context, state) {
-            if (state is AuthRegisterFailed) {
-              CustomSnackBars.failure(context, state.message!);
-            } else if (state is AuthRegisterSuccess) {
-              CustomSnackBars.success(
-                context,
-                'Account has been created successfully. Please check your email for verification.',
-              );
-              Navigator.pop(context);
-            }
-          },
-          builder: (context, state) {
-            if (state is AuthRegisterLoading) {
-              return const FullScreenLoader(
-                loading: true,
-              );
-            }
-            return const SizedBox();
-          },
-        ),
-      ],
+      overlayWidgets: Overlays.authOverlay(),
       child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
@@ -108,8 +84,9 @@ class RegisterScreen extends StatelessWidget {
                     prefixIcon: const Icon(Icons.lock_outline),
                     textInputType: TextInputType.text,
                     validators: FormBuilderValidators.compose([
+                      FormBuilderValidators.min(6,
+                          errorText: 'Password must be at least 6 characters'),
                       FormBuilderValidators.required(),
-                      FormBuilderValidators.min(6),
                     ]),
                   ),
                   Space.y1,
@@ -189,6 +166,8 @@ class RegisterScreen extends StatelessWidget {
                     onPressed: () {
                       if (state.registerFormState.currentState!
                           .saveAndValidate()) {
+                        FocusScope.of(context).unfocus();
+
                         final fields =
                             state.registerFormState.currentState!.fields;
 
