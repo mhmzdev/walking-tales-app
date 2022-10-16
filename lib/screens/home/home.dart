@@ -59,7 +59,10 @@ class HomeScreen extends StatelessWidget {
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const LinearProgressIndicator();
+                        return RippleEffect(
+                          size: 60,
+                          color: AppTheme.c.primary,
+                        );
                       } else if (snapshot.hasData) {
                         return Column(
                           children: [
