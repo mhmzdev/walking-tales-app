@@ -8,6 +8,7 @@ import 'package:walking_tales/cubits/user_stats/cubit.dart';
 import 'package:walking_tales/firebase_options.dart';
 import 'package:walking_tales/providers/app_provider.dart';
 import 'package:walking_tales/providers/user_location.dart';
+import 'package:walking_tales/screens/base_screen/base_screen.dart';
 import 'package:walking_tales/screens/dashboard/dashboard.dart';
 import 'package:walking_tales/screens/home/home.dart';
 import 'package:walking_tales/screens/leader_board/leader_board.dart';
@@ -67,6 +68,7 @@ class MyApp extends StatelessWidget {
           AppRoutes.dashboard: (context) => const DashboardScreen(),
           AppRoutes.trackCompleted: (context) => const TrackCompletedScreen(),
           AppRoutes.leaderBoard: (context) => const LeaderBoardScreen(),
+          AppRoutes.baseScreen: (context) => const BaseScreen(),
           AppRoutes.home: (context) => const HomeScreen(),
           AppRoutes.login: (context) => const LoginScreen(),
           AppRoutes.register: (context) => const RegisterScreen(),

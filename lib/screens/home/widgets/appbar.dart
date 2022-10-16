@@ -1,21 +1,28 @@
 import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
+import 'package:provider/provider.dart';
 import 'package:walking_tales/configs/configs.dart';
 import 'package:walking_tales/painters/notification_bell.dart';
 import 'package:walking_tales/painters/stats.dart';
 import 'package:walking_tales/painters/trophy.dart';
+import 'package:walking_tales/providers/app_provider.dart';
 
 class MyAppBar extends StatelessWidget {
   const MyAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final app = Provider.of<AppProvider>(context);
     return Padding(
       padding: Space.v,
       child: Row(
         children: [
           Space.x,
+          IconButton(
+            onPressed: () => app.toggleDrawer(),
+            icon: const Icon(Icons.menu),
+          ),
           DelayedDisplay(
             delay: const Duration(milliseconds: 300),
             slidingBeginOffset: const Offset(-10, 0),

@@ -121,72 +121,74 @@ class _TrackingScreenState extends State<TrackingScreen> {
 
     return Scaffold(
       body: SafeArea(
-        child: Stack(children: [
-          GoogleMap(
-            padding: EdgeInsets.only(bottom: bottomPadding),
-            compassEnabled: false,
-            mapToolbarEnabled: false,
-            initialCameraPosition: CameraPosition(
-              target: const LatLng(
-                33.6843312,
-                72.9884995,
-              ),
-              zoom: MapUtils.getZoomLevel(1000),
-            ),
-            onMapCreated: (controller) {
-              _controller.complete(controller);
-              setState(() {
-                bottomPadding = 70;
-              });
-            },
-            gestureRecognizers: {}..add(
-                Factory<OneSequenceGestureRecognizer>(
-                  () => EagerGestureRecognizer(),
+        child: Stack(
+          children: [
+            GoogleMap(
+              padding: EdgeInsets.only(bottom: bottomPadding),
+              compassEnabled: false,
+              mapToolbarEnabled: false,
+              initialCameraPosition: CameraPosition(
+                target: const LatLng(
+                  33.6843312,
+                  72.9884995,
                 ),
+                zoom: MapUtils.getZoomLevel(1000),
               ),
-            polylines: Set<Polyline>.of(polylines.values),
-            markers: Set<Marker>.of(markers.values),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: _BottomBar(onButtonPress: () async {
-              if (stream != null) {
-                app.setDistanceTraveled(
-                  MapUtils.getDistance(
-                    userLocationProvider.userLocation!,
-                    lastKnownLocation,
+              onMapCreated: (controller) {
+                _controller.complete(controller);
+                setState(() {
+                  bottomPadding = 70;
+                });
+              },
+              gestureRecognizers: {}..add(
+                  Factory<OneSequenceGestureRecognizer>(
+                    () => EagerGestureRecognizer(),
                   ),
-                );
-
-                userLocationProvider.userLocation = lastKnownLocation;
-                app.setPolyCoordinates(polylineCoordinates);
-                await stream!.cancel().then((value) =>
-                    Navigator.pushReplacementNamed(
-                        context, AppRoutes.trackCompleted));
-              } else {
-                polylines = {};
-                startListeningToUserLocation();
-              }
-            }),
-          ),
-          Align(
-            alignment: Alignment.topCenter,
-            child: StepCounter(
-              userSteps: userSteps,
-            ),
-          ),
-          if (!app.isTrackingStarted)
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CircularBackButton(
-                  color: AppTheme.c.primary,
-                  iconColor: Colors.white,
                 ),
+              polylines: Set<Polyline>.of(polylines.values),
+              markers: Set<Marker>.of(markers.values),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: _BottomBar(onButtonPress: () async {
+                if (stream != null) {
+                  app.setDistanceTraveled(
+                    MapUtils.getDistance(
+                      userLocationProvider.userLocation!,
+                      lastKnownLocation,
+                    ),
+                  );
+
+                  userLocationProvider.userLocation = lastKnownLocation;
+                  app.setPolyCoordinates(polylineCoordinates);
+                  await stream!.cancel().then((value) =>
+                      Navigator.pushReplacementNamed(
+                          context, AppRoutes.trackCompleted));
+                } else {
+                  polylines = {};
+                  startListeningToUserLocation();
+                }
+              }),
+            ),
+            Align(
+              alignment: Alignment.topCenter,
+              child: StepCounter(
+                userSteps: userSteps,
               ),
             ),
-        ]),
+            if (!app.isTrackingStarted)
+              Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CircularBackButton(
+                    color: AppTheme.c.primary,
+                    iconColor: Colors.white,
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

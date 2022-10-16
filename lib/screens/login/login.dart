@@ -33,7 +33,7 @@ class LoginScreen extends StatelessWidget {
             if (state is AuthLoginFailed) {
               CustomSnackBars.failure(context, state.message!);
             } else if (state is AuthLoginSuccess) {
-              Navigator.pushReplacementNamed(context, AppRoutes.home);
+              Navigator.pushReplacementNamed(context, AppRoutes.baseScreen);
             }
           },
           builder: (context, state) {

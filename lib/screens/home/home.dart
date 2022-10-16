@@ -38,32 +38,40 @@ class HomeScreen extends StatelessWidget {
           },
         ),
       ],
-      child: Scaffold(body: SafeArea(
-        child: BlocBuilder<UserStatsCubit, UserStatsState>(
-          builder: (context, state) {
-            if (state is UserStatsFetchLoading) {
-              return const LinearProgressIndicator();
-            } else if (state is UserStatsFetchSuccess) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const MyAppBar(),
-                  DashGauge(totalSteps: state.totalSteps),
-                  DashStats(state: state),
-                  const Expanded(child: WeeklyChart())
-                ],
+      child: Scaffold(
+        body: SafeArea(
+          child: BlocBuilder<UserStatsCubit, UserStatsState>(
+            builder: (context, state) {
+              if (state is UserStatsFetchLoading) {
+                return const LinearProgressIndicator();
+              } else if (state is UserStatsFetchSuccess) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const MyAppBar(),
+                    DashGauge(
+                      totalSteps: state.totalSteps,
+                    ),
+                    DashStats(
+                      state: state,
+                    ),
+                    const Expanded(
+                      child: WeeklyChart(),
+                    )
+                  ],
+                );
+              } else if (state is UserStatsFetchFailed) {
+                return Center(
+                  child: Text(state.message!),
+                );
+              }
+              return const Center(
+                child: Text('Something went wrong!'),
               );
-            } else if (state is UserStatsFetchFailed) {
-              return Center(
-                child: Text(state.message!),
-              );
-            }
-            return const Center(
-              child: Text('Something went wrong!'),
-            );
-          },
+            },
+          ),
         ),
-      )),
+      ),
     );
   }
 }

@@ -14,9 +14,7 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: const Size(428, 926));
-    final appPro = Provider.of<AppProvider>(
-      context,
-    );
+    final appPro = Provider.of<AppProvider>(context);
 
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

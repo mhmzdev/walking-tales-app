@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
         await authCubit.fetch();
 
         if (!mounted) return;
-        Navigator.pushNamed(context, AppRoutes.home);
+        Navigator.pushNamed(context, AppRoutes.baseScreen);
       }
     });
   }

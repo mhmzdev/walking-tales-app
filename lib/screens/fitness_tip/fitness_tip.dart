@@ -23,6 +23,7 @@ class FitnessTipScreen extends StatelessWidget {
     final dietCubit = DietCubit.cubit(context);
 
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: Space.all(),
