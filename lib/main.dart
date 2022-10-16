@@ -9,6 +9,7 @@ import 'package:walking_tales/cubits/challenge/cubit.dart';
 import 'package:walking_tales/cubits/domain/cubit.dart';
 import 'package:walking_tales/firebase_options.dart';
 import 'package:walking_tales/providers/app_provider.dart';
+import 'package:walking_tales/screens/challenge_detail/challenge_detail.dart';
 import 'package:walking_tales/screens/challenges/challenges.dart';
 import 'package:walking_tales/screens/create_challenge/create_challenge.dart';
 import 'package:walking_tales/screens/home/home.dart';
@@ -55,6 +56,7 @@ class MyApp extends StatelessWidget {
           AppRoutes.register: (context) => const RegisterScreen(),
           AppRoutes.challenges: (context) => const ChallengesScreen(),
           AppRoutes.createChallenge: (context) => const CreateChallengeScreen(),
+          AppRoutes.challengeDetail: (context) => const ChallengeDetailScreen(),
         },
       ),
     );

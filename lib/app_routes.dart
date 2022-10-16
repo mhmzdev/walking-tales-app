@@ -6,5 +6,6 @@ class AppRoutes {
 	static const splash = 'splash';
 	static const challenges = 'challenges';
 	static const register = 'register';
+	static const challengeDetail = 'challengeDetail';
 	static const login = 'login';
 }
