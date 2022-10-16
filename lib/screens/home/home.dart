@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-import 'package:walking_tales/configs/app.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
+
+import 'package:walking_tales/app_routes.dart';
+import 'package:walking_tales/configs/app.dart';
 import 'package:walking_tales/configs/configs.dart';
 import 'package:walking_tales/cubits/auth/cubit.dart';
-import 'package:walking_tales/utils/overlays.dart';
+import 'package:walking_tales/utils/custom_snackbar.dart';
 import 'package:walking_tales/utils/static_utils.dart';
 import 'package:walking_tales/widgets/buttons/app_button.dart';
+import 'package:walking_tales/widgets/loader/full_screen_loader.dart';
 import 'package:walking_tales/widgets/screen/screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -20,7 +24,25 @@ class HomeScreen extends StatelessWidget {
     final authCubit = AuthCubit.cubit(context);
 
     return Screen(
-      overlayWidgets: Overlays.authOverlay(),
+      overlayWidgets: [
+        BlocConsumer<AuthCubit, AuthState>(
+          listener: (context, state) {
+            if (state is AuthLogoutFailed) {
+              CustomSnackBars.failure(context, state.message!);
+            } else if (state is AuthLogoutSuccess) {
+              Navigator.popAndPushNamed(context, AppRoutes.login);
+            }
+          },
+          builder: (context, state) {
+            if (state is AuthLogoutLoading) {
+              return const FullScreenLoader(
+                loading: true,
+              );
+            }
+            return const SizedBox();
+          },
+        ),
+      ],
       child: Scaffold(
         body: SafeArea(
           child: Center(
