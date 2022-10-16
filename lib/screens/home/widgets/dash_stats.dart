@@ -43,11 +43,7 @@ class DashStats extends StatelessWidget {
   }
 
   double getValue(int index) {
-    print("Calories: ${state!.totalCaloriesBurned!.toDouble()}");
-    print(
-        "Average Speed: ${double.parse(state!.averageSpeed!.toStringAsFixed(1))}");
-    print(
-        "Distance Traveled: ${double.parse(state!.distanceTraveled!.toStringAsFixed(1))}");
+   
     switch (index) {
       case 0:
         return state!.totalCaloriesBurned!.toDouble();
