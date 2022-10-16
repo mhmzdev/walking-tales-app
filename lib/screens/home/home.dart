@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -51,9 +52,42 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Space.top,
+                  StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('users')
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const LinearProgressIndicator();
+                      } else if (snapshot.hasData) {
+                        return Column(
+                          children: [
+                            Text(
+                              'Registrations',
+                              style: AppText.h2b,
+                            ),
+                            Space.y1,
+                            CircleAvatar(
+                              backgroundColor: AppTheme.c.primary,
+                              radius: 40.h,
+                              child: Text(
+                                snapshot.data!.docs.length.toString(),
+                                style: AppText.h1b.cl(Colors.white),
+                              ),
+                            ),
+                          ],
+                        );
+                      } else if (snapshot.hasError) {
+                        return Text(snapshot.error.toString());
+                      }
+
+                      return const Text('Something went wrong');
+                    },
+                  ),
+                  Space.y2,
                   Lottie.asset(
                     StaticUtils.shoes2,
-                    height: 300.h,
+                    height: 200.h,
                   ),
                   Text(
                     'Hi! ${authCubit.state.data!.fullName}',

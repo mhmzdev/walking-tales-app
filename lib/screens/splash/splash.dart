@@ -6,6 +6,7 @@ import 'package:walking_tales/configs/app.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:walking_tales/configs/configs.dart';
 import 'package:walking_tales/cubits/auth/cubit.dart';
+import 'package:walking_tales/cubits/domain/cubit.dart';
 import 'package:walking_tales/utils/static_utils.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -19,6 +20,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void next() async {
     Future.delayed(const Duration(seconds: 3), () async {
       final user = FirebaseAuth.instance.currentUser;
+
+      DomainCubit.cubit(context).fetch();
 
       if (user == null) {
         Navigator.pushNamed(context, AppRoutes.login);

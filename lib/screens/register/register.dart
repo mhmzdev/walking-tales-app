@@ -9,9 +9,9 @@ import 'package:intl/intl.dart';
 import 'package:walking_tales/configs/app.dart';
 import 'package:walking_tales/configs/configs.dart';
 import 'package:walking_tales/cubits/auth/cubit.dart';
+import 'package:walking_tales/cubits/domain/cubit.dart';
 import 'package:walking_tales/providers/app_provider.dart';
 import 'package:walking_tales/utils/custom_snackbar.dart';
-import 'package:walking_tales/utils/domains.dart';
 import 'package:walking_tales/widgets/buttons/app_button.dart';
 import 'package:walking_tales/widgets/loader/full_screen_loader.dart';
 import 'package:walking_tales/widgets/screen/screen.dart';
@@ -28,6 +28,8 @@ class RegisterScreen extends StatelessWidget {
 
     final state = AppProvider.state(context);
     final authCubit = AuthCubit.cubit(context);
+    final domainCubit = DomainCubit.cubit(context);
+    final domains = domainCubit.state.data!;
 
     return Screen(
       overlayWidgets: [
