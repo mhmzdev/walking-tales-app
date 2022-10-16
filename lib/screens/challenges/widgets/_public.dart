@@ -21,9 +21,29 @@ class _Public extends StatelessWidget {
               style: AppText.b2,
             ),
             Space.y1,
+            const CustomTextField(
+              name: 'search',
+              hint: 'Type something...',
+              prefixIcon: Icon(Icons.search),
+              textInputType: TextInputType.text,
+            ),
+            Space.y1,
             for (int i = 0; i < 12; i++)
-              const WidgetAnimator(
-                child: ChallengeCard(),
+              WidgetAnimator(
+                child: ChallengeCard(
+                  challenge: Challenge(
+                    isPublic: true,
+                    uid: 'stea',
+                    id: 'sdfsd',
+                    participants: 2,
+                    points: 23.22,
+                    description:
+                        'Driving students for maintaing physical health while they are in campus.',
+                    title: 'Healthiest Campus of Islamabad',
+                    startDate: DateTime.now(),
+                    createdAt: DateTime.now(),
+                  ),
+                ),
               )
           ],
         ),

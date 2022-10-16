@@ -62,7 +62,8 @@ class _Friends extends StatelessWidget {
               'Create challenge',
               style: AppText.b1b.cl(Colors.white),
             ),
-            onPressed: () {},
+            onPressed: () =>
+                Navigator.pushNamed(context, AppRoutes.createChallenge),
           ),
           AppDividers.simple(context),
           Row(
@@ -115,12 +116,40 @@ class _Friends extends StatelessWidget {
             style: AppText.b2,
           ),
           Space.y1,
-          for (int i = 0; i < 12; i++)
-            const WidgetAnimator(
-              child: ChallengeCard(
-                shadowColor: Colors.green,
-              ),
-            )
+          BlocBuilder<ChallengeCubit, ChallengeState>(
+            builder: (context, state) {
+              if (state.fetch is ChallengeFetchLoading) {
+                return const LinearProgressIndicator();
+              } else if (state.fetch is ChallengeFetchSuccess) {
+                if (state.fetch?.data == null || state.fetch!.data!.isEmpty) {
+                  return Center(
+                    child: Text(
+                      'No friends challanges yet!',
+                      style: AppText.h1b,
+                    ),
+                  );
+                }
+                return ListView(
+                  shrinkWrap: true,
+                  children: state.fetch!.data!
+                      .map(
+                        (ch) => WidgetAnimator(
+                          child: ChallengeCard(
+                            challenge: ch,
+                            shadowColor: Colors.green,
+                          ),
+                        ),
+                      )
+                      .toList(),
+                );
+              } else if (state.fetch is ChallengeFetchFailed) {
+                return Center(child: Text(state.fetch!.message!));
+              }
+              return const Center(
+                child: Text('Something went wrong'),
+              );
+            },
+          ),
         ],
       ),
     );

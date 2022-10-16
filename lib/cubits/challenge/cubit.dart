@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -24,15 +25,48 @@ class ChallengeCubit extends Cubit<ChallengeState> {
       fetch: const ChallengeFetchLoading(),
     ));
     try {
-      final data = await repo.fetch();
-      emit(state.copyWith(
-        fetch: ChallengeFetchSuccess(data: data),
-      ));
+      final data = repo.fetch();
+      data.listen((event) {
+        final docs = event.docs;
+        final challenges = List.generate(
+          docs.length,
+          (index) => Challenge.fromMap(
+            docs[index].data(),
+          ),
+        );
+        emit(state.copyWith(
+          fetch: ChallengeFetchSuccess(data: challenges),
+        ));
+      }, onDone: () {
+        emit(state.copyWith(
+          fetch: ChallengeFetchSuccess(data: state.fetch?.data),
+        ));
+      });
     } catch (e) {
       emit(state.copyWith(
         fetch: ChallengeFetchFailed(message: e.toString()),
       ));
     }
   }
+
+  Future<void> add(Challenge challenge) async {
+    emit(state.copyWith(
+      add: const ChallengeAddLoading(),
+    ));
+    try {
+      await repo.add(challenge);
+
+      emit(state.copyWith(
+        add: const ChallengeAddSuccess(),
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        add: ChallengeAddFailed(message: e.toString()),
+      ));
+    }
+  }
 }
+
+
+
 // end-cubit

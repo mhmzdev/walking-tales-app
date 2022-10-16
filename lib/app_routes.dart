@@ -2,6 +2,7 @@ class AppRoutes {
 // This is an auto generated file. Do not make any change on this.
 
 	static const home = 'home';
+	static const createChallenge = 'createChallenge';
 	static const splash = 'splash';
 	static const challenges = 'challenges';
 	static const register = 'register';

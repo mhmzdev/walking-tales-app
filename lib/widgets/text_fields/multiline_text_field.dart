@@ -48,7 +48,6 @@ class CustomMultiLineTextField extends StatelessWidget {
         textCapitalization: TextCapitalization.sentences,
         focusNode: node,
         decoration: InputDecoration(
-          filled: true,
           contentPadding:
               EdgeInsets.symmetric(horizontal: 18.w, vertical: 18.h),
           hintText: hint,

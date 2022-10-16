@@ -1,6 +1,9 @@
 part of 'cubit.dart';
 
 class ChallengeRepository {
-  Future<List<Challenge>> fetch([Map<String, dynamic>? map]) =>
-      ChallengeDataProvider.fetch(map);
+  Stream<QuerySnapshot<Map<String, dynamic>>> fetch() =>
+      ChallengeDataProvider.fetch();
+
+  Future<void> add(Challenge challenge) =>
+      ChallengeDataProvider.add(challenge.toMap());
 }

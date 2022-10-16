@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:walking_tales/configs/configs.dart';
+import 'package:walking_tales/models/challenge.dart';
 
 class ChallengeCard extends StatelessWidget {
+  final Challenge challenge;
   final Color? shadowColor;
 
   const ChallengeCard({
     Key? key,
+    required this.challenge,
     this.shadowColor,
   }) : super(key: key);
 
@@ -34,15 +37,16 @@ class ChallengeCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Healthiest University in Islamabad',
+                  challenge.title,
                   style: AppText.b1b.copyWith(
                     color: AppTheme.c.primaryDark,
                     fontSize: AppDimensions.font(8),
                   ),
                 ),
                 Text(
-                  'Driving students for maintaing physical health while they are in campus.',
+                  challenge.description,
                   style: AppText.l1.cl(Colors.grey),
+                  maxLines: 2,
                 ),
               ],
             ),
