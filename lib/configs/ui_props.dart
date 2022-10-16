@@ -24,6 +24,7 @@ abstract class UIProps {
   static late BoxDecoration borderButton;
   static late BorderRadius topBoth15;
   static late BorderRadius topBoth30;
+  static late BorderRadius topBoth50;
 
   // Shadows
   static List<BoxShadow>? cardShadow;
@@ -55,6 +56,10 @@ abstract class UIProps {
     topBoth30 = BorderRadius.only(
       topLeft: Radius.circular(ScreenUtil().radius(25)),
       topRight: Radius.circular(ScreenUtil().radius(25)),
+    );
+    topBoth50 = BorderRadius.only(
+      topLeft: Radius.circular(ScreenUtil().radius(50)),
+      topRight: Radius.circular(ScreenUtil().radius(50)),
     );
   }
 
