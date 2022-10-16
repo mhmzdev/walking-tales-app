@@ -7,5 +7,6 @@ class AppRoutes {
 	static const challenges = 'challenges';
 	static const register = 'register';
 	static const challengeDetail = 'challengeDetail';
+	static const fitnessTip = 'fitnessTip';
 	static const login = 'login';
 }

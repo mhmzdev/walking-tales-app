@@ -7,6 +7,7 @@ class AppProvider extends ChangeNotifier {
       Provider.of<AppProvider>(context, listen: false);
 
   // keys
+  final dietFormState = GlobalKey<FormBuilderState>();
   final loginFormState = GlobalKey<FormBuilderState>();
   final registerFormState = GlobalKey<FormBuilderState>();
   final challengeFormState = GlobalKey<FormBuilderState>();
