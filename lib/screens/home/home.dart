@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
+import 'package:walking_tales/animations/ripple_effect/ripple_effect.dart';
 
 import 'package:walking_tales/app_routes.dart';
 import 'package:walking_tales/configs/app.dart';
@@ -66,14 +67,22 @@ class HomeScreen extends StatelessWidget {
                               'Registrations',
                               style: AppText.h2b,
                             ),
-                            Space.y1,
-                            CircleAvatar(
-                              backgroundColor: AppTheme.c.primary,
-                              radius: 40.h,
-                              child: Text(
-                                snapshot.data!.docs.length.toString(),
-                                style: AppText.h1b.cl(Colors.white),
-                              ),
+                            Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                RippleEffect(
+                                  size: 60,
+                                  color: AppTheme.c.primary,
+                                ),
+                                CircleAvatar(
+                                  backgroundColor: AppTheme.c.primary,
+                                  radius: 40.h,
+                                  child: Text(
+                                    snapshot.data!.docs.length.toString(),
+                                    style: AppText.h1b.cl(Colors.white),
+                                  ),
+                                )
+                              ],
                             ),
                           ],
                         );
@@ -84,7 +93,6 @@ class HomeScreen extends StatelessWidget {
                       return const Text('Something went wrong');
                     },
                   ),
-                  Space.y2,
                   Lottie.asset(
                     StaticUtils.shoes2,
                     height: 200.h,
