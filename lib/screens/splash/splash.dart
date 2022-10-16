@@ -6,6 +6,7 @@ import 'package:walking_tales/configs/app.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:walking_tales/configs/configs.dart';
 import 'package:walking_tales/cubits/auth/cubit.dart';
+import 'package:walking_tales/cubits/challenge/cubit.dart';
 import 'package:walking_tales/cubits/domain/cubit.dart';
 import 'package:walking_tales/utils/static_utils.dart';
 
@@ -27,6 +28,8 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushNamed(context, AppRoutes.login);
       } else {
         final authCubit = AuthCubit.cubit(context);
+        ChallengeCubit.c(context).fetch();
+        
         await authCubit.fetch();
 
         if (!mounted) return;
@@ -67,7 +70,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
                 Space.y,
                 Text(
-                  "Let's get your health back along with some gifts from your favourite brands!",
+                  "Let Your Steps Define Your Story",
                   textAlign: TextAlign.center,
                   style: AppText.b2.cl(Colors.grey),
                 )

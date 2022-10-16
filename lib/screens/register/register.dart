@@ -123,6 +123,7 @@ class RegisterScreen extends StatelessWidget {
                     name: 'dob',
                     icon: const Icon(Icons.event_outlined),
                     format: DateFormat('dd-MM-yyyy'),
+                    initialDate: DateTime(1999),
                     firstDate: DateTime(1956),
                     lastDate: DateTime(2010),
                     validatorFtn: (value) {

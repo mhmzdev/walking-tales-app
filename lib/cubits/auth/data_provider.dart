@@ -12,7 +12,7 @@ class AuthDataProvider {
 
       return data;
     } catch (e) {
-      throw Exception(e.toString());
+      throw e.toString();
     }
   }
 
@@ -49,7 +49,7 @@ class AuthDataProvider {
           );
       }
     } catch (e) {
-      throw Exception(e.toString());
+      throw e.toString();
     }
   }
 
@@ -82,7 +82,7 @@ class AuthDataProvider {
           throw Exception(e.message);
       }
     } catch (e) {
-      throw Exception(e.toString());
+      throw e.toString();
     }
   }
 
@@ -94,7 +94,7 @@ class AuthDataProvider {
         throw Exception('No account exists against this email address.');
       }
     } catch (e) {
-      throw Exception(e.toString());
+      throw e.toString();
     }
   }
 }

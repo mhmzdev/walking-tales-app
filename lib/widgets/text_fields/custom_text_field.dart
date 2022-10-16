@@ -112,7 +112,6 @@ class CustomTextFieldState extends State<CustomTextField> {
                     ),
                   )
                 : null,
-            filled: true,
             contentPadding:
                 EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
             hintText: widget.hint,
