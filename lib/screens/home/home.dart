@@ -6,7 +6,6 @@ import 'package:walking_tales/screens/home/widgets/appbar.dart';
 import 'package:walking_tales/screens/home/widgets/dash_gauge.dart';
 import 'package:walking_tales/screens/home/widgets/dash_stats.dart';
 import 'package:walking_tales/screens/home/widgets/weekly_chart.dart';
-import 'package:walking_tales/utils/custom_snackbar.dart';
 
 import '../../widgets/loader/full_screen_loader.dart';
 import '../../widgets/screen/screen.dart';
