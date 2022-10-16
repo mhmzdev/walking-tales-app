@@ -13,7 +13,7 @@ class AppProvider extends ChangeNotifier {
   // bottom bar
   int bottomIndex = 0;
 
-  set setBottomIndex(int value) {
+  void setBottomIndex(int value) {
     bottomIndex = value;
     notifyListeners();
   }

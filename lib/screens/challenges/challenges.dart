@@ -30,6 +30,15 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
       child: Builder(builder: (context) {
         return Scaffold(
           appBar: AppBar(
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.refresh_rounded,
+                ),
+              ),
+              Space.x1,
+            ],
             backgroundColor: DefaultTabController.of(context)?.index == 0
                 ? AppTheme.c.primary
                 : Colors.green,
